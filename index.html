@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Worth Listening To</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 50px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .subtitle { 
+            font-size: 1.3em; 
+            color: #cbd5e1; 
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .intro {
+            max-width: 800px;
+            margin: 30px auto 0;
+            padding: 25px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+        .genre-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        .genre-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+        }
+        .genre-title {
+            font-size: 2.2em;
+            color: #ec4899;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .genre-description {
+            color: #94a3b8;
+            font-size: 1.1em;
+            line-height: 1.7;
+            font-style: italic;
+        }
+        .track-item {
+            display: block;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .track-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .track-item:hover::before {
+            left: 100%;
+        }
+        .track-item:hover {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+            border-color: #8b5cf6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+        .track-title {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .track-description {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .track-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+        .click-hint {
+            color: #06b6d4;
+            font-weight: 500;
+        }
+        .track-item:hover .click-hint {
+            color: #22d3ee;
+        }
+        .closing {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        .closing h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #a78bfa;
+        }
+        .closing p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .highlight { color: #a78bfa; font-weight: 600; }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .subtitle { font-size: 1.1em; }
+            .genre-section { padding: 20px; }
+            .track-item { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Music Worth Your Time</h1>
+            <p class="subtitle">
+                These are the songs I keep coming back to.<br>
+                If you want music with real substance - start here.
+            </p>
+            <div class="intro">
+                I've listened to these tracks dozens of times each, and they still hit. No fluff, no filler - 
+                just music that makes you feel something. Click any track to give it a listen.
+            </div>
+        </div>
+
+        <!-- Soul/R&B/Funk -->
+        <div class="genre-section">
+            <div class="genre-header">
+                <h2 class="genre-title">🎵 Soul/R&B/Funk</h2>
+                <p class="genre-description">
+                    This is where musicianship meets emotion. Tight arrangements, genuine soul, and the kind of groove that makes you move without thinking about it.
+                </p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=85ewvhgV700" target="_blank" class="track-item">
+                <div class="track-title">Lawrence - "Guy I Used To Be" (acoustic-ish)</div>
+                <div class="track-description">
+                    Stripped-down perfection. When Lawrence goes acoustic, you hear every detail - the harmonies, 
+                    the soul, the raw emotion. This is what happens when technically brilliant musicians just let it flow.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=K-znpK-NARc" target="_blank" class="track-item">
+                <div class="track-title">Lake Street Dive - "Dance With A Stranger"</div>
+                <div class="track-description">
+                    Live on The Late Show and they absolutely own it. This band proves you don't need studio magic 
+                    when you've got real talent. The energy, the vocals, the timing - everything clicks.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=EEdORLpQHcQ" target="_blank" class="track-item">
+                <div class="track-title">Marcus King - "Beautiful Stranger"</div>
+                <div class="track-description">
+                    Blues-rock soul at its finest. Marcus King's voice carries the weight of classic soul singers 
+                    while his guitar work reminds you why live musicianship matters. This RealTV session captures him at his best.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=M9TYHOARDFI" target="_blank" class="track-item">
+                <div class="track-title">Lawrence - "The Weather" (Acoustic & Gospel Reprise)</div>
+                <div class="track-description">
+                    When they add gospel elements to their already incredible sound, magic happens. 
+                    The harmonies layer in ways that give you chills. Pure musical joy.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=SRzvkKb-JRI" target="_blank" class="track-item">
+                <div class="track-title">Allen Stone - "Give You Blue"</div>
+                <div class="track-description">
+                    Modern soul that feels timeless. Allen Stone's vocals are smooth but never slick - 
+                    there's real feeling behind every note. This live performance shows why he's the real deal.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Emotional/Singer-Songwriter -->
+        <div class="genre-section">
+            <div class="genre-header">
+                <h2 class="genre-title">💙 Songs That Hit Different</h2>
+                <p class="genre-description">
+                    For when you need music that understands. These aren't just songs - they're conversations with your own emotions.
+                </p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=yzavsRSpuXc" target="_blank" class="track-item">
+                <div class="track-title">Ray LaMontagne - "Let It Be Me"</div>
+                <div class="track-description">
+                    Ray's voice is like whiskey and smoke - it carries decades of feeling even when he's young. 
+                    This song doesn't try to be clever; it just is. Sometimes simplicity cuts the deepest.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=DK4UDFzIZ3Q" target="_blank" class="track-item">
+                <div class="track-title">Sara Bareilles - "Saint Honesty"</div>
+                <div class="track-description">
+                    Live from Here, Sara delivers one of those performances where you forget you're watching a show. 
+                    It's intimate, vulnerable, and showcases why she's one of the best songwriters working today.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=XF6UnHLzp5Y" target="_blank" class="track-item">
+                <div class="track-title">Lewis Capaldi - "Wish You The Best" (Cover by Alec Chambers)</div>
+                <div class="track-description">
+                    Alec Chambers takes an already emotional song and strips it down even further. 
+                    His voice has this rawness that makes you feel like he's singing directly to you, not performing for a crowd.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=Ht2NCrlghS4" target="_blank" class="track-item">
+                <div class="track-title">Sara Bareilles - "A Safe Place to Land" (ft. John Legend)</div>
+                <div class="track-description">
+                    Two phenomenal vocalists, one beautiful song about finding home in another person. 
+                    The harmonies between Sara and John are effortless - like they've been singing together forever.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Hip-Hop/Rap -->
+        <div class="genre-section">
+            <div class="genre-header">
+                <h2 class="genre-title">🔥 Hip-Hop With Substance</h2>
+                <p class="genre-description">
+                    Rap that makes you think, rewind, and catch lines you missed the first time. Technical skill meets meaningful content.
+                </p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=mH9aqKjCZTM" target="_blank" class="track-item">
+                <div class="track-title">JID - "31" (FREESTYLE)</div>
+                <div class="track-description">
+                    JID doesn't just rap fast - he raps with purpose. Every bar is intentional, every flow switch calculated. 
+                    This freestyle shows why he's one of the most technically gifted rappers in the game right now.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=GhOUB6IGs6Y" target="_blank" class="track-item">
+                <div class="track-title">JID - "32" (Freestyle)</div>
+                <div class="track-description">
+                    Part two, same excellence. JID proves consistency isn't boring when you have this much skill. 
+                    The wordplay, the pocket changes, the pure confidence - this is hip-hop at its finest.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=7cnfuVUBGoo" target="_blank" class="track-item">
+                <div class="track-title">Dax - "The Abyss"</div>
+                <div class="track-description">
+                    Dax goes deep - literally and figuratively. This isn't party rap; it's introspective, 
+                    raw, and real. He tackles the darkness head-on with bars that make you pause the track and process.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=y_QBUzo47u8" target="_blank" class="track-item">
+                <div class="track-title">JID - "Glory"</div>
+                <div class="track-description">
+                    When JID gets in the studio with production that matches his skill level, you get tracks like this. 
+                    It's atmospheric but hard-hitting, technical but accessible. This is what modern hip-hop should sound like.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=xmFwGQyBVsc" target="_blank" class="track-item">
+                <div class="track-title">Harry Mack - "CRASHES My Stream" (NYC)</div>
+                <div class="track-description">
+                    Pure freestyle genius. Harry Mack doesn't write anything down - he just creates bars on the spot 
+                    that sound better than most people's written verses. Watch this and try not to be impressed.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=U8F5G5wR1mk" target="_blank" class="track-item">
+                <div class="track-title">Kendrick Lamar - "tv off"</div>
+                <div class="track-description">
+                    Kendrick being Kendrick - cryptic, clever, and culturally significant. Every line has layers, 
+                    every beat choice is intentional. This is the kind of track you discover new details in on the 10th listen.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Blues/Jazz -->
+        <div class="genre-section">
+            <div class="genre-header">
+                <h2 class="genre-title">🎹 Jazz/Blues Excellence</h2>
+                <p class="genre-description">
+                    Music that rewards attention. Complex harmonies, sophisticated arrangements, and performances that remind you why musicianship matters.
+                </p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=qCCXqxTZadU" target="_blank" class="track-item">
+                <div class="track-title">Jacob Collier - "Heaven (Butterflies)"</div>
+                <div class="track-description">
+                    Jacob Collier is a musical genius, and this Mahogany Session proves it. The harmonies he creates 
+                    seem impossible - until you hear him do it live. This is what happens when prodigious talent meets genuine emotion.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=esHx23OD_bc" target="_blank" class="track-item">
+                <div class="track-title">Jacob Collier - "Little Blue" (Piano Cover)</div>
+                <div class="track-description">
+                    Piano covers of Jacob's work show the beauty of the composition beneath the production. 
+                    Even simplified, his songs are stunning - which is the mark of truly great writing.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=H0nrRFPMH70" target="_blank" class="track-item">
+                <div class="track-title">"Ray's Mood" - Slow Gospel Blues Piano</div>
+                <div class="track-description">
+                    Sometimes you don't need words. This slow gospel blues speaks through the keys - 
+                    the kind of playing that makes you close your eyes and just feel it. Perfect for late nights.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=Mgu__P7-KgU" target="_blank" class="track-item">
+                <div class="track-title">Jacob Collier - "Something Heavy" (Live from Riga)</div>
+                <div class="track-description">
+                    Live Jacob is even more impressive than studio Jacob. Watch him conduct the audience like an instrument, 
+                    building harmonies in real-time. This is what the future of music looks like.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=7sZhB2hvTCA" target="_blank" class="track-item">
+                <div class="track-title">Hugh Laurie - "Let Them Talk"</div>
+                <div class="track-description">
+                    Yes, THAT Hugh Laurie. Turns out Dr. House can play blues piano like nobody's business. 
+                    This isn't a celebrity vanity project - it's legitimately great blues music that would stand on its own.
+                </div>
+                <div class="track-meta">
+                    <span class="click-hint">🎧 Listen on YouTube →</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Closing -->
+        <div class="closing">
+            <h2>Why These?</h2>
+            <p>
+                These aren't just songs I like - they're songs that <span class="highlight">made me stop and listen</span>. 
+                In a world of algorithmic playlists and background music, these tracks demand your attention. 
+                They reward it too. Real musicianship, authentic emotion, and substance that stays with you. 
+                <br><br>
+                Whether it's Lawrence's tight funk arrangements, JID's technical mastery, Sara Bareilles' vulnerable songwriting, 
+                or Jacob Collier's harmonic wizardry - <span class="highlight">these are artists who give a damn about their craft</span>.
+                <br><br>
+                Give them a listen. Let me know what hits.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
